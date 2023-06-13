@@ -4,7 +4,7 @@ import Step2 from './steps/Step2';
 import Step1 from './steps/Step1';
 import Welcome from './steps/Welcome';
 import {Button} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Confirm from './steps/Confirm.jsX';
 
 const MultiForm = () => {
