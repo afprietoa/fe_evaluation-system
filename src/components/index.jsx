@@ -17,5 +17,5 @@ export {
     Job,
     JobsContainer,
     SearchContainer,
-    Loading
+    Loading,
 };

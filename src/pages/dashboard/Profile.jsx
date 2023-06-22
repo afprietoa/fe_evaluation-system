@@ -3,22 +3,25 @@ import {FormRow} from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage.js";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { updateUser } from "../../features/user/userSlice";
+// import { updateUser } from "../../features/user/userSlice";
+import FormRowSelect from "../../components/FormRowSelect";
+import { updateUser } from "../../features/user/userThunk";
 
 const Profile = () => {
   const {isLoading, user} = useSelector((store) =>store.user);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({
-    name:user?.name || '',
-    email:user?.email || '',
-    lastName:user?.lastName || '',
-    location:user?.location || '',
+    username:user?.username || '',
+    password:user?.password || '',
+    role:user?.role || '',
   });
+  const roleList = ['teacher', 'student'];
 
   const onSubmit = (event)=>{
     event.preventDefault();
-    const {name, email, lastName, location} = userData;
-    if(!name || !email || !lastName || !location){
+    const {username, password, role} = userData;
+    if(!username || !password || !role){
+      console.log(userData)
       toast.error('Please fill out all fields.');
       return;
     }
@@ -40,31 +43,25 @@ const Profile = () => {
         <div className="form-center">
           <FormRow 
             type='text'
-            name='name'
-            labelText='nombre'
-            value={userData.name}
+            name='username'
+            labelText='username'
+            value={userData.username}
             handleChange={handleChange}
           />
           <FormRow 
-            type='text'
-            labelText='nivel academico'
-            name='lastName'
-            value={userData.lastName}
+            type='password'
+            labelText='password'
+            name='password'
+            value={userData.password}
             handleChange={handleChange}
           />
-          <FormRow 
-            type='email'
-            name='email'
-            value={userData.email}
-            handleChange={handleChange}
-          />
-          <FormRow 
-            type='text'
-            labelText='departamento'
-            name='location'
-            value={userData.location}
-            handleChange={handleChange}
-          />
+           <FormRowSelect 
+           labelText='role'
+           name='role'
+           value={userData.role}
+           handleChange={handleChange}
+           list={roleList}
+         />
           <button type="submit" className="btn btn-block" disabled={isLoading}>
             {isLoading ? 'Please Wait...' : 'save changes'}
           </button>

@@ -1,143 +1,167 @@
-import React from "react";
-import { Form } from "react-bootstrap";
+import React from 'react'
+import { Button, FormControl, RadioGroup, Spinner, HStack,Container } from "@chakra-ui/react";
+import { DivForm, FormStyle, RadioStyled, LabelStyled, ContainerStyled } from "../../assets/wrappers/Evaluation";
 
 const Step1 = ({ values, handleChange }) => {
-  console.log(values, handleChange);
   return (
-    <div>
-      <Form className="mt-5">
-        <h4>Enter your Details</h4>
-
-        <Form.Group className="mt-5" controlId="qs1">
-        <Form.Label>El desempeño global de este docente fue:</Form.Label>    
-        <Form.Check
-          value="'Muy alto"
-          type="radio"
-          aria-label="radio 1"
-          label="'Muy alto"
-          onChange={handleChange("qs1")}
-          checked={values.qs1 === "'Muy alto"}
-        />
-        <Form.Check
-          value="Alto"
-          type="radio"
-          aria-label="radio 2"
-          label="Alto"
-          onChange={handleChange("qs1")}
-          checked={values.qs1 === "Alto"}
-        />
-        <Form.Check
-          value="Bajo"
-          type="radio"
-          aria-label="radio 3"
-          label="Bajo"
-          onChange={handleChange("qs1")}
-          checked={values.qs1 === "Bajo"}
-        />
-       <Form.Check
-          value="Muy bajo"
-          type="radio"
-          aria-label="radio 4"
-          label="Muy bajo"
-          onChange={handleChange("qs1")}
-          checked={values.qs1 === "Muy bajo"}
-        />
-        </Form.Group>
+    <>
+      <FormStyle>
         
 
-      
-        <Form.Group className="mt-5" controlId="qs2">
-        <Form.Label>¿El docente dedicó tiempo suficiente o adecuado para asesorar, orientar y aclarar dudas?</Form.Label>    
-        <Form.Check
-          value="Siempre"
-          type="radio"
-          aria-label="radio 1"
-          label="Siempre"
+        <FormControl  as='fieldset'>
+
+        <LabelStyled as='legend'>El desempeño global de este docente fue:</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>
+        <RadioStyled
+          value="'Muy alto"
+          onChange={handleChange("qs1")}
+        >Muy alto</RadioStyled>
+        <RadioStyled
+          value="Alto"
+          onChange={handleChange("qs1")}
+          >Alto</RadioStyled>
+        <RadioStyled
+          value="Bajo"
+          onChange={handleChange("qs1")}
+          >Bajo</RadioStyled>
+       <RadioStyled
+          value="Muy bajo"
+          onChange={handleChange("qs1")}
+          >Muy bajo</RadioStyled>
+        </HStack>
+        </RadioGroup>
+        
+
+        <LabelStyled as='legend'>¿El docente dedicó tiempo suficiente o adecuado para asesorar, orientar y aclarar dudas?</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>    
+        <RadioStyled          
+         value="Siempre"
           onChange={handleChange("qs2")}
-          checked={values.qs2 === "Siempre"}
-        />
-        <Form.Check
-          value="Frecuentemente"
-          type="radio"
-          aria-label="radio 2"
-          label="Frecuentemente"
+          >Siempre</RadioStyled>
+        <RadioStyled          value="Frecuentemente"
           onChange={handleChange("qs2")}
-          checked={values.qs2 === "Frecuentemente"}
-        />
-       <Form.Check
-          value="A veces"
-          type="radio"
-          aria-label="radio 2"
-          label="A veces"
+          >Frecuentemente</RadioStyled>
+       <RadioStyled          
+         value="A veces"
           onChange={handleChange("qs2")}
-          checked={values.qs2 === "A veces"}
-        />
-       <Form.Check
+          >A veces</RadioStyled>
+       <RadioStyled          
           value="Nunca"
-          type="radio"
-          aria-label="radio 2"
-          label="Nunca"
           onChange={handleChange("qs2")}
-          checked={values.qs2 === "Nunca"}
-        />
-      <Form.Check
+          >Nunca</RadioStyled>
+      <RadioStyled          
           value="No se aplica"
-          type="radio"
-          aria-label="radio 2"
-          label="No se aplica"
           onChange={handleChange("qs2")}
-          checked={values.qs2 === "No se aplica"}
-        />
-        </Form.Group>
+          >No se aplica</RadioStyled>
+        </HStack>
+        </RadioGroup>
 
 
-        <Form.Group className="mt-5" controlId="qs3">
-        <Form.Label>¿El docente fue justo e imparcial durante las actividades académicas y en las evaluaciones?</Form.Label>    
-        <Form.Check
+
+        <LabelStyled as='legend'>¿El docente fue justo e imparcial durante las actividades académicas y en las evaluaciones?</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>
+        <RadioStyled          
           value="Siempre"
-          type="radio"
-          aria-label="radio 1"
-          label="Siempre"
           onChange={handleChange("qs3")}
-          checked={values.qs3 === "Siempre"}
-        />
-        <Form.Check
+          >Siempre</RadioStyled>
+        <RadioStyled          
           value="Frecuentemente"
-          type="radio"
-          aria-label="radio 2"
-          label="Frecuentemente"
           onChange={handleChange("qs3")}
-          checked={values.qs3 === "Frecuentemente"}
-        />
-       <Form.Check
+          >Frecuentemente</RadioStyled>
+       <RadioStyled          
           value="A veces"
-          type="radio"
-          aria-label="radio 2"
-          label="A veces"
           onChange={handleChange("qs3")}
-          checked={values.qs3 === "A veces"}
-        />
-       <Form.Check
+          >A veces</RadioStyled>
+       <RadioStyled          
           value="Nunca"
-          type="radio"
-          aria-label="radio 2"
-          label="Nunca"
           onChange={handleChange("qs3")}
-          checked={values.qs3 === "Nunca"}
-        />
-      <Form.Check
+          >Nunca</RadioStyled>
+      <RadioStyled          
           value="No se aplica"
-          type="radio"
-          aria-label="radio 2"
-          label="No se aplica"
           onChange={handleChange("qs3")}
-          checked={values.qs3 === "No se aplica"}
-        />
-        </Form.Group>
+          >No se aplica</RadioStyled>
+        </HStack>
+        </RadioGroup>
 
-      </Form>
-    </div>
-  );
-};
+        <LabelStyled as='legend'>¿El docente fue respetuoso con usted y tolerante con sus puntos de vista?</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>
+        <RadioStyled
+          value="Siempre"
+          onChange={handleChange("qs4")}
+          >Siempre</RadioStyled>
+        <RadioStyled
+          value="Frecuentemente"
+          onChange={handleChange("qs4")}
+          >Frecuentemente</RadioStyled>
+       <RadioStyled
+          value="A veces"
+          onChange={handleChange("qs4")}
+          >A veces</RadioStyled>
+       <RadioStyled
+          value="Nunca"
+          onChange={handleChange("qs4")}
+          >Nunca</RadioStyled>
+      <RadioStyled
+          value="No se aplica"
+          onChange={handleChange("qs4")}
+          >No se aplica</RadioStyled>
+        </HStack>
+        </RadioGroup>
+
+        <LabelStyled as='legend'>¿El docente inspiró o motivó su interés por los temas tratados?</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>
+        <RadioStyled
+          value="Sí"
+          onChange={handleChange("qs5")}
+          >Sí</RadioStyled>
+        <RadioStyled
+          value="No"
+          onChange={handleChange("qs5")}
+          >No</RadioStyled>
+        </HStack>
+        </RadioGroup>
+
+        <LabelStyled as='legend'>¿El docente promovió en usted la argumentación o la reflexión crítica?</LabelStyled>    
+        <RadioGroup spacing='24px'>
+        <HStack>
+        <RadioStyled
+          value="Sí"
+          onChange={handleChange("qs6")}
+          >Sí</RadioStyled>
+        <RadioStyled
+          value="No"
+          onChange={handleChange("qs6")}
+          >No</RadioStyled>
+        </HStack>
+        </RadioGroup>
+
+        <LabelStyled as='legend'>Estime el rango de horas en las que estuvo en contacto en este semestre con este docente:</LabelStyled>    
+        <RadioGroup >
+        <HStack spacing='24px'>
+        <RadioStyled
+          value="1-48 horas"
+          onChange={handleChange("qs7")}
+        >1-48 horas</RadioStyled>
+        <RadioStyled
+          value="49-96 horas"
+          onChange={handleChange("qs7")}
+          >49-96 horas</RadioStyled>
+        <RadioStyled
+          value="Más de 96 horas"
+          onChange={handleChange("qs7")}
+          >Más de 96 horas</RadioStyled>
+        </HStack>
+        </RadioGroup>
+
+        </FormControl>
+      </FormStyle>
+    </>
+  )
+}
 
 export default Step1;

@@ -4,13 +4,15 @@ import {Logo, FormRow} from '../components'
 import Wrapper from '../assets/wrappers/RegisterPage'
 import {toast} from 'react-toastify';
 import {useDispatch, useSelector} from 'react-redux';
-import {loginUser, registerUser } from './../features/user/userSlice';
 import { useNavigate } from 'react-router-dom'
+import FormRowSelect from '../components/FormRowSelect';
+import axios from 'axios';
+import { loginUser, registerUser } from '../features/user/userThunk';
 
 const initialState = {
-    name:'',
-    email:'',
+    username:'',
     password:'',
+    role:'',
     isMember: true
 }
 
@@ -20,26 +22,32 @@ function Register() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {isLoading, user} = useSelector((store) =>store.user)
+    const roleList = ['teacher', 'student'];
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setvalues({...values, [name]: value})
     }
-    const onSubmit = (event)=>{
+    const onSubmit = async (event)=>{
         event.preventDefault();
-        const {name, email, password, isMember} = values;
-        if(!email || !password || (!isMember && !name)){
+        const {username, password, role,isMember} = values;
+        if(!username || !password){
             toast.error('Please fill out all fields');
+            console.log(values);
             return;
         }
         if(isMember){
-            dispatch(loginUser({email: email, password:password}));
+            console.log(user);
+            dispatch(loginUser({username: username, password:password}));
+            console.log(user);
             return;
         }
-            dispatch(registerUser({name, email, password}));
-        
+        console.log(user);
+            dispatch(registerUser({username, password, role}));
+            console.log(user);
 
+            
         //console.log(event.target);
     }
     const toggleMember = ()=>{
@@ -50,7 +58,7 @@ function Register() {
       if(user)
       setTimeout(() => {
         navigate('/');
-      }, 2000);
+      }, 3000);
     }, [user])
     
 
@@ -60,22 +68,13 @@ function Register() {
             <h3 >Edificando</h3>
 
             <h3>{values.isMember ? 'Login': 'Register'}</h3>
-            {/*name filed*/}
-            {!values.isMember && (
-                <FormRow 
-                    type='text'
-                    name='name'
-                    value={values.name}
-                    handleChange={handleChange}
-                />
-              )
-            }
+
 
             {/*email filed*/}
             <FormRow 
-                type='email'
-                name='email'
-                value={values.email}
+                type='text'
+                name='username'
+                value={values.username}
                 handleChange={handleChange}
             />
 
@@ -87,6 +86,18 @@ function Register() {
                 handleChange={handleChange}
             />
 
+            {/*name filed*/}
+            {!values.isMember && (
+
+           <FormRowSelect 
+           labelText='role'
+           name='role'
+           value={values.role}
+           handleChange={handleChange}
+           list={roleList}
+         />
+              )
+            }
             <button type="submit" className='btn btn-block' disabled={isLoading}>
                 submit
             </button>

@@ -1,18 +1,19 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
+import Step3 from './steps/Step3';
 import Step2 from './steps/Step2';
-
 import Step1 from './steps/Step1';
-import Welcome from './steps/Welcome';
-import {Button} from 'react-bootstrap';
 
-import Confirm from './steps/Confirm.jsX';
+import Confirm from './steps/Confirm';
+import { Button, Stack, Flex, Spacer } from "@chakra-ui/react";
+import { ContainerStyled, DivForm } from '../assets/wrappers/Evaluation';
+
 
 const MultiForm = () => {
   //Steps
   const [activeStep, setActiveStep] = useState(0)
 
   const getSteps = () => {
-    return ["Welcome", "Step1", "Step2", "Confirm"]
+    return ["Step1", "Step2", "Step3", "Confirm"]
   }
 
   const steps = getSteps()
@@ -24,7 +25,22 @@ const MultiForm = () => {
     qs3: "",
     qs4: "",
     qs5: "",
-    qs6: ""
+    qs6: "",
+    qs7: "",
+    qs8: "",
+    qs9: "",
+    qs10: "",
+    qs11: "",
+    qs12: "",
+    qs13: "",
+    qs14: "",
+    qs15: "",
+    qs16: "",
+    qs17: "",
+    qs18: "",
+    qs19: "",
+    qs20: "",
+    qs21: "",
   })
 
   //Navigates to the next page
@@ -41,24 +57,38 @@ const MultiForm = () => {
     setMultiFormValues({...multiFormValues, [input]: e.target.value})
   }
   return (
-    <div>
+    <ContainerStyled>
+    <DivForm>
       {activeStep === 0 && (
-        <Welcome handleChange={handleChange} />
-      )}
-      {activeStep === 1 && (
         <Step1 values={multiFormValues} handleChange={handleChange} />
       )}
-      {activeStep === 2 && (
+      {activeStep === 1 && (
         <Step2 values={multiFormValues} handleChange={handleChange} />
+      )}
+      {activeStep === 2 && (
+        <Step3 values={multiFormValues} handleChange={handleChange} />
       )}
       {activeStep === 3 && (
         <Confirm values={multiFormValues} handleChange={handleChange} />
       )}
+<Flex >
+      <Button    
+  height='48px'
+  width='100px'
+  border='2px'
+  p='4'
+            colorScheme='teal' disabled={activeStep === 0} onClick={handleBack} style={activeStep === 3 ? {display: 'none'} : {}} >Back</Button>
 
-      <Button disabled={activeStep === 0} className="mr-5" onClick={handleBack} style={activeStep === 3 ? {display: 'none'} : {}} >Back</Button>
-
-      <Button className="ml-5" variant="contained" onClick={handleNext} style={activeStep === 3 ? {display: 'none'} : {}} >{}{activeStep === steps.length - 2 ? 'Submit' : 'Next'}</Button>
-    </div>
+<Spacer />
+      <Button    size='md'
+  height='48px'
+  width='100px'
+  border='2px'
+  p='4'
+  borderColor='green.500' onClick={handleNext} style={activeStep === 3 ? {display: 'none'} : {}} >{}{activeStep === steps.length - 2 ? 'Submit' : 'Next'}</Button>
+    </Flex>
+    </DivForm>
+    </ContainerStyled>
   )
 }
 
